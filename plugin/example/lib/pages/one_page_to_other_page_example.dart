@@ -88,7 +88,7 @@ class _OnePageExampleState extends State<OnePageExample> {
               ),
             ),
             SizedBox(height: 2),
-            FlatButton(
+            TextButton(
               onPressed: this._gotTo,
               child: Text("Page 2"),
             ),

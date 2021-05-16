@@ -14,7 +14,7 @@ class _IssuesPageState extends State<IssuesPage> {
     controlsStyle: ControlsStyle.primary,
   );
 
-  DataSource _dataSource;
+  // DataSource _dataSource;
 
   // playVideo() async {
   //   if (_dataSource == null) {

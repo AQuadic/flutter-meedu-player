@@ -65,7 +65,7 @@ class _FullscreenExamplePageState extends State<FullscreenExamplePage> {
       valueListenable: currentIndex,
       builder: (_, int index, __) {
         final hasNext = index < videos.length - 1;
-        return FlatButton(
+        return TextButton(
           onPressed: hasNext
               ? () {
                   currentIndex.value++;

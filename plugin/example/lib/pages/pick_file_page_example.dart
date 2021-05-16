@@ -46,7 +46,7 @@ class _PickFileExamplePageState extends State<PickFileExamplePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: FlatButton(
+        child: TextButton(
           child: Text("Pick video file"),
           onPressed: this._onPickFile,
         ),
