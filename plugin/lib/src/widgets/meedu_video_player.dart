@@ -109,20 +109,23 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return MeeduPlayerProvider(
-      child: Container(
-        color: Colors.black,
-        width: 0.0,
-        height: 0.0,
-        child: RxBuilder(
-          observables: [
-            widget.controller.showControls,
-            widget.controller.dataStatus.status
-          ],
-          builder: (__) => _getView(widget.controller),
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: MeeduPlayerProvider(
+        child: Container(
+          color: Colors.black,
+          width: 0.0,
+          height: 0.0,
+          child: RxBuilder(
+            observables: [
+              widget.controller.showControls,
+              widget.controller.dataStatus.status
+            ],
+            builder: (__) => _getView(widget.controller),
+          ),
         ),
+        controller: widget.controller,
       ),
-      controller: widget.controller,
     );
   }
 }
