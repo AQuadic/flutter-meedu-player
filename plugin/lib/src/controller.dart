@@ -197,6 +197,7 @@ class MeeduPlayerController {
         dataSource.source,
         formatHint: dataSource.formatHint,
         closedCaptionFile: dataSource.closedCaptionFile,
+        httpHeaders: dataSource.httpHeaders,
       );
     } else {
       tmp = new VideoPlayerController.file(

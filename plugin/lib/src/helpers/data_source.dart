@@ -9,6 +9,7 @@ class DataSource {
   final DataSourceType type;
   final VideoFormat formatHint;
   final Future<ClosedCaptionFile> closedCaptionFile; // for subtiles
+  final Map<String, String> httpHeaders; // for network
 
   DataSource({
     this.file,
@@ -17,6 +18,7 @@ class DataSource {
     this.formatHint,
     this.package,
     this.closedCaptionFile,
+    this.httpHeaders,
   })  : assert(type != null),
         assert((type == DataSourceType.file && file != null) || source != null);
 
@@ -27,6 +29,7 @@ class DataSource {
     DataSourceType type,
     VideoFormat formatHint,
     Future<ClosedCaptionFile> closedCaptionFile,
+    Map<String, String> httpHeaders, // for network
   }) {
     return DataSource(
       file: file ?? this.file,
@@ -35,6 +38,7 @@ class DataSource {
       package: package ?? this.package,
       formatHint: formatHint ?? this.formatHint,
       closedCaptionFile: closedCaptionFile ?? this.closedCaptionFile,
+      httpHeaders: httpHeaders ?? this.httpHeaders,
     );
   }
 }
