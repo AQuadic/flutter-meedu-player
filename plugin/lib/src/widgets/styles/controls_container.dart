@@ -4,15 +4,14 @@ import 'package:meedu_player/src/controller.dart';
 
 class ControlsContainer extends StatelessWidget {
   final Widget child;
-  const ControlsContainer({Key key, @required this.child}) : super(key: key);
+  const ControlsContainer({required this.child});
 
   @override
   Widget build(BuildContext context) {
     final _ = MeeduPlayerController.of(context);
     return Positioned.fill(
       child: RxBuilder(
-        observables: [_.showControls],
-        builder: (__) => GestureDetector(
+        (__) => GestureDetector(
           onTap: () => _.controls = !_.showControls.value,
           child: AnimatedOpacity(
             opacity: _.showControls.value ? 1 : 0,

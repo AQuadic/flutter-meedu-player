@@ -5,8 +5,7 @@ import 'package:meedu_player/meedu_player.dart';
 class MeeduPlayerFullscreenPage extends StatelessWidget {
   final MeeduPlayerController controller;
 
-  const MeeduPlayerFullscreenPage({Key key, @required this.controller})
-      : super(key: key);
+  const MeeduPlayerFullscreenPage({required this.controller});
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
@@ -15,8 +14,7 @@ class MeeduPlayerFullscreenPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.black,
         body: RxBuilder(
-          observables: [controller.videoFit],
-          builder: (__) {
+          (__) {
             return Container(
               width: double.infinity,
               height: double.infinity,

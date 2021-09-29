@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:meedu_player/meedu_player.dart';
-
 import 'package:meedu_player/src/helpers/responsive.dart';
 import 'package:meedu_player/src/widgets/play_pause_button.dart';
 import 'package:meedu_player/src/widgets/styles/controls_container.dart';
 import 'package:meedu_player/src/widgets/styles/primary/bottom_controls.dart';
+
 import '../../player_button.dart';
 
 class PrimaryVideoPlayerControls extends StatelessWidget {
   final Responsive responsive;
-  const PrimaryVideoPlayerControls({Key key, @required this.responsive})
-      : super(key: key);
+  const PrimaryVideoPlayerControls({required this.responsive});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class PrimaryVideoPlayerControls extends StatelessWidget {
           // RENDER A CUSTOM HEADER
           if (_.header != null)
             Positioned(
-              child: _.header,
+              child: _.header ?? Container(),
               left: 0,
               right: 0,
               top: 0,
@@ -32,7 +31,7 @@ class PrimaryVideoPlayerControls extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (_.enabledButtons.rewindAndfastForward) ...[
+              if (_.enabledButtons?.rewindAndfastForward ?? false) ...[
                 PlayerButton(
                   onPressed: _.rewind,
                   size: responsive.ip(_.fullscreen.value ? 8 : 12),
@@ -43,11 +42,11 @@ class PrimaryVideoPlayerControls extends StatelessWidget {
                 ),
                 SizedBox(width: 10),
               ],
-              if (_.enabledButtons.playPauseAndRepeat)
+              if (_.enabledButtons?.playPauseAndRepeat ?? false)
                 PlayPauseButton(
                   size: responsive.ip(_.fullscreen.value ? 10 : 15),
                 ),
-              if (_.enabledButtons.rewindAndfastForward) ...[
+              if (_.enabledButtons?.rewindAndfastForward ?? false) ...[
                 SizedBox(width: 10),
                 PlayerButton(
                   onPressed: _.fastForward,

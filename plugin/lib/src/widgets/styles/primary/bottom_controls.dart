@@ -11,8 +11,7 @@ import 'package:meedu_player/src/widgets/video_fit_button.dart';
 
 class PrimaryBottomControls extends StatelessWidget {
   final Responsive responsive;
-  const PrimaryBottomControls({Key key, @required this.responsive})
-      : super(key: key);
+  const PrimaryBottomControls({required this.responsive});
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +30,7 @@ class PrimaryBottomControls extends StatelessWidget {
         children: [
           // START VIDEO POSITION
           RxBuilder(
-            observables: [_.duration, _.position],
-            builder: (__) => Text(
+            (__) => Text(
               _.duration.value.inMinutes >= 60
                   ? printDurationWithHours(_.position.value)
                   : printDuration(_.position.value),
@@ -47,8 +45,7 @@ class PrimaryBottomControls extends StatelessWidget {
           SizedBox(width: 10),
           // START VIDEO DURATION
           RxBuilder(
-            observables: [_.duration],
-            builder: (__) => Text(
+            (__) => Text(
               _.duration.value.inMinutes >= 60
                   ? printDurationWithHours(_.duration.value)
                   : printDuration(_.duration.value),
@@ -57,15 +54,19 @@ class PrimaryBottomControls extends StatelessWidget {
           ),
           // END VIDEO DURATION
           SizedBox(width: 15),
-          if (_.bottomRight != null) ...[_.bottomRight, SizedBox(width: 5)],
+          if (_.bottomRight != null) ...[
+            _.bottomRight ?? Container(),
+            SizedBox(width: 5)
+          ],
 
-          if (_.enabledButtons.pip) PipButton(responsive: responsive),
+          if (_.enabledButtons?.pip ?? false) PipButton(responsive: responsive),
 
-          if (_.enabledButtons.videoFit) VideoFitButton(responsive: responsive),
-          if (_.enabledButtons.muteAndSound)
+          if (_.enabledButtons?.videoFit ?? false)
+            VideoFitButton(responsive: responsive),
+          if (_.enabledButtons?.muteAndSound ?? false)
             MuteSoundButton(responsive: responsive),
 
-          if (_.enabledButtons.fullscreen)
+          if (_.enabledButtons?.fullscreen ?? false)
             FullscreenButton(
               size: responsive.ip(_.fullscreen.value ? 5 : 7),
             )

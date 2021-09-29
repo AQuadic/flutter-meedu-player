@@ -4,8 +4,6 @@ import 'package:meedu_player/meedu_player.dart';
 import 'package:meedu_player/src/helpers/utils.dart';
 
 class PlayerSlider extends StatelessWidget {
-  const PlayerSlider({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final _ = MeeduPlayerController.of(context);
@@ -15,8 +13,7 @@ class PlayerSlider extends StatelessWidget {
         Container(
           child: LayoutBuilder(builder: (ctx, constraints) {
             return RxBuilder(
-              observables: [_.buffered, _.duration],
-              builder: (__) {
+              (__) {
                 // convert the bufferedLoaded to a percent using the video duration as a 100%
                 double percent = 0;
                 if (_.buffered.value.isNotEmpty) {
@@ -35,8 +32,7 @@ class PlayerSlider extends StatelessWidget {
           }),
         ),
         RxBuilder(
-          observables: [_.sliderPosition, _.duration],
-          builder: (__) {
+          (__) {
             final int value = _.sliderPosition.value.inSeconds;
             final double max = _.duration.value.inSeconds.toDouble();
             if (value > max || max <= 0) {
@@ -85,9 +81,9 @@ class PlayerSlider extends StatelessWidget {
 class MSliderTrackShape extends RoundedRectSliderTrackShape {
   @override
   Rect getPreferredRect({
-    RenderBox parentBox,
+    required RenderBox parentBox,
     Offset offset = Offset.zero,
-    SliderThemeData sliderTheme,
+    required SliderThemeData sliderTheme,
     bool isEnabled = false,
     bool isDiscrete = false,
   }) {

@@ -7,18 +7,17 @@ class PlayerButton extends StatelessWidget {
   final VoidCallback onPressed;
   final Color backgrounColor, iconColor;
   final bool circle;
-  final Widget customIcon;
+  final Widget? customIcon;
 
   const PlayerButton({
-    Key key,
     this.size = 40,
-    @required this.iconPath,
-    @required this.onPressed,
+    required this.iconPath,
+    required this.onPressed,
     this.circle = true,
     this.backgrounColor = Colors.white54,
     this.iconColor = Colors.black,
     this.customIcon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

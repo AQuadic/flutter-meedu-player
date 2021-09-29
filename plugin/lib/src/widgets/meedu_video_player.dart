@@ -15,26 +15,24 @@ class MeeduVideoPlayer extends StatefulWidget {
     BuildContext context,
     MeeduPlayerController controller,
     Responsive responsive,
-  ) header;
+  )? header;
 
   final Widget Function(
     BuildContext context,
     MeeduPlayerController controller,
     Responsive responsive,
-  ) bottomRight;
+  )? bottomRight;
 
   final CustomIcons Function(
     Responsive responsive,
-  ) customIcons;
+  )? customIcons;
 
   MeeduVideoPlayer({
-    Key key,
-    @required this.controller,
+    required this.controller,
     this.header,
     this.bottomRight,
     this.customIcons,
-  })  : assert(controller != null),
-        super(key: key);
+  }) : assert(controller != null);
 
   @override
   _MeeduVideoPlayerState createState() => _MeeduVideoPlayerState();
@@ -65,39 +63,39 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
         );
 
         if (widget.customIcons != null) {
-          _.customIcons = this.widget.customIcons(responsive);
+          _.customIcons = this.widget.customIcons!(responsive);
         }
 
         if (widget.header != null) {
-          _.header = this.widget.header(context, _, responsive);
+          _.header = this.widget.header!(context, _, responsive);
         }
 
         if (widget.bottomRight != null) {
-          _.bottomRight = this.widget.bottomRight(context, _, responsive);
+          _.bottomRight = this.widget.bottomRight!(context, _, responsive);
         }
         return Stack(
           alignment: Alignment.center,
           children: [
-            RxBuilder(
-                observables: [_.videoFit],
-                builder: (__) {
-                  return SizedBox.expand(
-                    child: FittedBox(
-                      fit: widget.controller.videoFit.value,
-                      child: SizedBox(
-                        width: _.videoPlayerController.value.size.width ?? 0,
-                        height: _.videoPlayerController.value.size.height ?? 0,
-                        child: VideoPlayer(_.videoPlayerController),
-                      ),
-                    ),
-                  );
-                }),
+            RxBuilder((__) {
+              return SizedBox.expand(
+                child: FittedBox(
+                  fit: widget.controller.videoFit.value,
+                  child: SizedBox(
+                    width: _.videoPlayerController?.value.size.width ?? 0,
+                    height: _.videoPlayerController?.value.size.height ?? 0,
+                    child: VideoPlayer(_.videoPlayerController!),
+                  ),
+                ),
+              );
+            }),
             ClosedCaptionView(responsive: responsive),
-            if (_.controlsEnabled && _.controlsStyle == ControlsStyle.primary)
+            if ((_.controlsEnabled ?? false) &&
+                _.controlsStyle == ControlsStyle.primary)
               PrimaryVideoPlayerControls(
                 responsive: responsive,
               ),
-            if (_.controlsEnabled && _.controlsStyle == ControlsStyle.secondary)
+            if ((_.controlsEnabled ?? false) &&
+                _.controlsStyle == ControlsStyle.secondary)
               SecondaryVideoPlayerControls(
                 responsive: responsive,
               ),
@@ -117,11 +115,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
           width: 0.0,
           height: 0.0,
           child: RxBuilder(
-            observables: [
-              widget.controller.showControls,
-              widget.controller.dataStatus.status
-            ],
-            builder: (__) => _getView(widget.controller),
+            (__) => _getView(widget.controller),
           ),
         ),
         controller: widget.controller,
@@ -134,10 +128,9 @@ class MeeduPlayerProvider extends InheritedWidget {
   final MeeduPlayerController controller;
 
   MeeduPlayerProvider({
-    Key key,
-    @required Widget child,
-    @required this.controller,
-  }) : super(key: key, child: child);
+    required Widget child,
+    required this.controller,
+  }) : super(child: child);
 
   @override
   bool updateShouldNotify(covariant InheritedWidget oldWidget) {

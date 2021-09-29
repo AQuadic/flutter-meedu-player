@@ -29,7 +29,8 @@ class PipManager {
   }
 
   Future<void> _getOSVersion() async {
-    final os = double.parse(await _channel.invokeMethod<String>('osVersion'));
+    final os = double.tryParse(
+        await _channel.invokeMethod<String>('osVersion') ?? '0');
     this._osVersion.complete(os);
   }
 
@@ -52,7 +53,7 @@ class PipManager {
     return available;
   }
 
-  Future<void> dispose() {
+  dispose() {
     return isInPipMode.close();
   }
 }

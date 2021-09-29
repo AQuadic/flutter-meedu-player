@@ -13,8 +13,7 @@ import '../../video_fit_button.dart';
 
 class SecondaryBottomControls extends StatelessWidget {
   final Responsive responsive;
-  const SecondaryBottomControls({Key key, @required this.responsive})
-      : super(key: key);
+  const SecondaryBottomControls({required this.responsive});
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +50,7 @@ class SecondaryBottomControls extends StatelessWidget {
                   ),
                   SizedBox(width: 5),
                   RxBuilder(
-                    observables: [_.duration, _.position],
-                    builder: (__) {
+                    (__) {
                       String text = "";
                       if (_.duration.value.inMinutes >= 60) {
                         // if the duration is >= 1 hour
@@ -91,15 +89,16 @@ class SecondaryBottomControls extends StatelessWidget {
               Row(
                 children: [
                   if (_.bottomRight != null) ...[
-                    _.bottomRight,
+                    _.bottomRight ?? Container(),
                     SizedBox(width: 10)
                   ],
-                  if (_.enabledButtons.pip) PipButton(responsive: responsive),
-                  if (_.enabledButtons.videoFit)
+                  if (_.enabledButtons?.pip ?? false)
+                    PipButton(responsive: responsive),
+                  if (_.enabledButtons?.videoFit ?? false)
                     VideoFitButton(responsive: responsive),
-                  if (_.enabledButtons.muteAndSound)
+                  if (_.enabledButtons?.muteAndSound ?? false)
                     MuteSoundButton(responsive: responsive),
-                  if (_.enabledButtons.fullscreen) ...[
+                  if (_.enabledButtons?.fullscreen ?? false) ...[
                     FullscreenButton(
                       size: buttonsSize,
                     ),
