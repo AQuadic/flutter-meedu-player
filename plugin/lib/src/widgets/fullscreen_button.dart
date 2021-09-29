@@ -14,7 +14,7 @@ class FullscreenButton extends StatelessWidget {
     return RxBuilder(
       (__) {
         String iconPath = 'assets/icons/minimize.png';
-        Widget? customIcon = _.customIcons?.minimize;
+        Widget? customIcon = _.customIcons.minimize;
 
         if (!_.fullscreen.value) {
           iconPath = 'assets/icons/fullscreen.png';

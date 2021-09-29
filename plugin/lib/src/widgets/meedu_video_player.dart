@@ -32,7 +32,7 @@ class MeeduVideoPlayer extends StatefulWidget {
     this.header,
     this.bottomRight,
     this.customIcons,
-  }) : assert(controller != null);
+  });
 
   @override
   _MeeduVideoPlayerState createState() => _MeeduVideoPlayerState();

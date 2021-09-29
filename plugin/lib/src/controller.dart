@@ -281,7 +281,7 @@ class MeeduPlayerController {
 
       // if we are playing a video
       if (_videoPlayerController != null &&
-          (_videoPlayerController?.value?.isPlaying ?? false)) {
+          (_videoPlayerController?.value.isPlaying ?? false)) {
         await this.pause(notify: false);
       }
 
@@ -293,9 +293,9 @@ class MeeduPlayerController {
       await _initializePlayer(seekTo: seekTo);
       if (oldController != null) {
         WidgetsBinding.instance?.addPostFrameCallback((_) async {
-          oldController?.removeListener(this._listener);
+          oldController.removeListener(this._listener);
           await oldController
-              ?.dispose(); // dispose the previous video controller
+              .dispose(); // dispose the previous video controller
         });
       }
 
@@ -304,7 +304,7 @@ class MeeduPlayerController {
 
       // set the video duration
       _duration.value =
-          _videoPlayerController?.value?.duration ?? Duration(seconds: 0);
+          _videoPlayerController?.value.duration ?? Duration(seconds: 0);
 
       // listen the video player events
       _videoPlayerController?.addListener(this._listener);
@@ -312,7 +312,7 @@ class MeeduPlayerController {
       print(e);
       print(s);
       if (_errorText == null) {
-        _errorText = _videoPlayerController?.value?.errorDescription ?? '';
+        _errorText = _videoPlayerController?.value.errorDescription ?? '';
       }
       dataStatus.status.value = DataStatus.error;
     }
@@ -381,7 +381,7 @@ class MeeduPlayerController {
   /// linear scale.
   Future<void> setVolume(double volume) async {
     assert(volume >= 0.0 && volume <= 1.0); // validate the param
-    _volumeBeforeMute = _videoPlayerController?.value?.volume ?? 0;
+    _volumeBeforeMute = _videoPlayerController?.value.volume ?? 0;
     await _videoPlayerController?.setVolume(volume);
   }
 
@@ -402,7 +402,7 @@ class MeeduPlayerController {
   /// [enabled] if is true the video player is muted
   Future<void> setMute(bool enabled) async {
     if (enabled) {
-      _volumeBeforeMute = _videoPlayerController?.value?.volume ?? 0;
+      _volumeBeforeMute = _videoPlayerController?.value.volume ?? 0;
     }
     _mute.value = enabled;
     await this.setVolume(enabled ? 0 : _volumeBeforeMute);

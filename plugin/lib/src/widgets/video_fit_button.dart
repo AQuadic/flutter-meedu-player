@@ -14,7 +14,7 @@ class VideoFitButton extends StatelessWidget {
     final _ = MeeduPlayerController.of(context);
     return RxBuilder((__) {
       String iconPath = 'assets/icons/fit.png';
-      Widget? customIcon = _.customIcons?.videoFit;
+      Widget? customIcon = _.customIcons.videoFit;
 
       return PlayerButton(
         size: responsive.ip(_.fullscreen.value ? 5 : 7),

@@ -19,7 +19,8 @@ class ScreenManager {
   /// set the default orientations and overlays after exit of fullscreen
   Future<void> setDefaultOverlaysAndOrientations() async {
     await SystemChrome.setPreferredOrientations(this.orientations);
-    await SystemChrome.setEnabledSystemUIOverlays(this.overlays);
+    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: this.overlays);
   }
 
   /// hide the statusBar and the navigation bar, set only landscape mode only if forceLandScapeInFullscreen is true
@@ -34,7 +35,8 @@ class ScreenManager {
         : this.orientations);
 
     if (hideOverLays) {
-      await SystemChrome.setEnabledSystemUIOverlays([]);
+      await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+          overlays: []);
     }
   }
 }
